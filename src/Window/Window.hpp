@@ -11,6 +11,8 @@ public:
 
     GameState CreateWindow();
 
+    SDL_Window* getWindow();
+
 private:
     SDL_Window* window;
 

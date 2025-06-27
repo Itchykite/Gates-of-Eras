@@ -3,16 +3,17 @@
 Game::Game()
 {
     window = new Window();    
+    renderer = new Renderer();
 }
 
-Game::~Game()
+Game::~Game() 
 {
-   delete window; 
+    clean();
 }
 
 GameState Game::Initialize()
 {
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
         return GameState::FAILURE;
@@ -21,6 +22,12 @@ GameState Game::Initialize()
     if(window->CreateWindow() != GameState::SUCCESS)
     {
         window->~Window();
+        return GameState::FAILURE;
+    }
+
+    if(renderer->CreateRenderer(window) != GameState::SUCCESS)
+    {
+        renderer->~Renderer();
         return GameState::FAILURE;
     }
 
@@ -34,7 +41,7 @@ GameState Game::Events()
     {
         if(e.type == SDL_QUIT || e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
         {
-            return GameState::FAILURE;
+            gameRunning = false;
         }
     }
 
@@ -45,12 +52,14 @@ GameState Game::Run()
 {
     while(gameRunning)
     {
-        if(Events() != GameState::SUCCESS)
+        if(Events() == GameState::FAILURE)
         {
             return GameState::FAILURE;
         }
 
-
+        renderer->RenderClear();
+        renderer->RenderRect();
+        renderer->RenderPresent();
     }
 
     return GameState::SUCCESS;
@@ -59,5 +68,6 @@ GameState Game::Run()
 void Game::clean()
 {
     delete window;
+    delete renderer;
     SDL_Quit();
 }

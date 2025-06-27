@@ -19,7 +19,8 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         -fansi-escape-codes
         -O0
         -g
-    )
+        -lX11
+)
 endif()
 
 file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp

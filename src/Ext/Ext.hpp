@@ -2,7 +2,7 @@
 
 enum class GameState 
 {
-    CONTINUE,
+    END,
     FAILURE,
     SUCCESS
 };

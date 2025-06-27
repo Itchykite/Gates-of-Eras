@@ -14,7 +14,16 @@ GameState Window::CreateWindow()
     return GameState::SUCCESS;
 }
 
+SDL_Window* Window::getWindow()
+{
+    return window;
+}
+
 Window::~Window()
 {
-    if(window) SDL_DestroyWindow(window);
+    if(window)
+    {
+        SDL_DestroyWindow(window);
+        window = nullptr;
+    }
 }
