@@ -12,6 +12,8 @@ public:
     GameState CreateWindow(int displayIndex, int width, int height, Uint32 flags);
 
     SDL_Window* getWindow();
+    int getWidth() const;
+    int getHeight() const;
 
 private:
     SDL_Window* window;

@@ -19,6 +19,8 @@ public:
     void RenderPresent();
     void RenderRect();
 
+    SDL_Renderer* getRenderer(); 
+
 private:
     SDL_Renderer* renderer;
 };

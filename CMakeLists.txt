@@ -28,6 +28,7 @@ file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp
                                     src/Window/*.cpp
                                     src/Ext/*.cpp
                                     src/Config/*.cpp
+                                    src/Tilemap/*.cpp
                                 )
 
 add_executable(Gates_of_Eras ${SOURCES})

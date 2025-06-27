@@ -15,6 +15,11 @@ Renderer::~Renderer()
     }
 }
 
+SDL_Renderer* Renderer::getRenderer()
+{
+    return renderer;
+}
+
 GameState Renderer::CreateRenderer(Window*& window)
 {
     renderer = SDL_CreateRenderer(window->getWindow(), -1, SDL_RENDERER_ACCELERATED);

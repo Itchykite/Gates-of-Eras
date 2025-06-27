@@ -30,6 +30,20 @@ SDL_Window* Window::getWindow()
     return window;
 }
 
+int Window::getWidth() const
+{
+    int width;
+    SDL_GetWindowSize(window, &width, nullptr);
+    return width;
+}
+
+int Window::getHeight() const
+{
+    int height;
+    SDL_GetWindowSize(window, nullptr, &height);
+    return height;
+}
+
 Window::~Window()
 {
     if(window)

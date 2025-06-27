@@ -3,6 +3,7 @@
 #include "Window/Window.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Ext/Ext.hpp"
+#include "Tilemap/Tilemap.hpp"
 
 #include <string>
 
@@ -31,5 +32,6 @@ private:
 
     Window* window;   
     Renderer* renderer;
+    Tilemap* tilemap;
 };
 

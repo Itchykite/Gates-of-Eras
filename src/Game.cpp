@@ -6,6 +6,7 @@ Game::Game()
 {
     window = new Window();    
     renderer = new Renderer();
+    tilemap = new Tilemap();
 }
 
 Game::~Game() 
@@ -67,6 +68,18 @@ GameState Game::Initialize()
         return GameState::FAILURE;
     }
 
+    if(!(tilemap->loadTileset(renderer->getRenderer(), "assets/tileset.png", 32)))
+    {
+        SDL_Log("Failed to load tileset");
+        return GameState::FAILURE;
+    }
+
+    if(!(tilemap->loadMapFromFile("assets/map.txt")))
+    {
+        SDL_Log("Failed to load map from file");
+        return GameState::FAILURE;
+    }
+
     return GameState::SUCCESS; 
 }
 
@@ -95,7 +108,7 @@ GameState Game::Run()
 
         renderer->RenderClear();
 
-        
+        tilemap->render(renderer->getRenderer(), window->getWidth(), window->getHeight());
 
         renderer->RenderPresent();
     }
@@ -107,5 +120,6 @@ void Game::clean()
 {
     delete window;
     delete renderer;
+    delete tilemap;
     SDL_Quit();
 }
