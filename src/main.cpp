@@ -1,16 +1,24 @@
 #include "Game.hpp"
+#include "Config/Config.hpp"
 
 int main()
 {
-    Game* game = new Game;  
-    if(game->Initialize() != GameState::SUCCESS)
+    bool config = RunConfigWindow();
+    if(config)
     {
-        delete game;
-        return -1;
-    }
-    game->Run();
+        Game* game = new Game;  
 
-    delete game;
+        game->LoadConfig("game_config.ini");
+
+        if(game->Initialize() != GameState::SUCCESS)
+        {
+            delete game;
+            return -1;
+        }
+        game->Run();
+
+        delete game;
+    }
 
     return 0;
 }

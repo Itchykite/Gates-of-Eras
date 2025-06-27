@@ -9,13 +9,13 @@ public:
     Window();
     ~Window();
 
-    GameState CreateWindow();
+    GameState CreateWindow(int displayIndex, int width, int height, Uint32 flags);
 
     SDL_Window* getWindow();
 
 private:
     SDL_Window* window;
 
-    int WINDOW_WIDTH = 1920;
-    int WINDOW_HEIGHT = 1080;
+    int WINDOW_WIDTH;
+    int WINDOW_HEIGHT;
 };

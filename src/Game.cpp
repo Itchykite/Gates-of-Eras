@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+#include <fstream>
+
 Game::Game()
 {
     window = new Window();    
@@ -11,6 +13,34 @@ Game::~Game()
     clean();
 }
 
+bool Game::LoadConfig(const std::string& filename)
+{
+    std::ifstream file(filename);
+    if (file.is_open()) 
+    {
+        std::string line;
+        while (std::getline(file, line)) 
+        {
+            size_t pos = line.find('=');
+            if (pos != std::string::npos) 
+            {
+                std::string key = line.substr(0, pos);
+                std::string value = line.substr(pos + 1);
+                
+                if (key == "DisplayIndex") displayIndex = std::stoi(value);
+                else if (key == "FullScreen") fullscreen = (value == "true");
+                else if (key == "Width") width = std::stoi(value);
+                else if (key == "Height") height = std::stoi(value);
+            }
+        }
+        file.close();
+   
+        return true;
+    }
+
+    return false;
+}
+
 GameState Game::Initialize()
 {
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -19,7 +49,13 @@ GameState Game::Initialize()
         return GameState::FAILURE;
     }
 
-    if(window->CreateWindow() != GameState::SUCCESS)
+    Uint32 windowFlags = SDL_WINDOW_SHOWN;
+    if (fullscreen)
+    {
+        windowFlags |= SDL_WINDOW_FULLSCREEN;
+    }
+
+    if(window->CreateWindow(displayIndex, width, height, windowFlags) != GameState::SUCCESS)
     {
         window->~Window();
         return GameState::FAILURE;
@@ -58,7 +94,9 @@ GameState Game::Run()
         }
 
         renderer->RenderClear();
-        renderer->RenderRect();
+
+        
+
         renderer->RenderPresent();
     }
 
