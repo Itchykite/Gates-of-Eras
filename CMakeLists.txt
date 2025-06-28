@@ -36,10 +36,13 @@ add_executable(Gates_of_Eras ${SOURCES})
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SDL2 REQUIRED sdl2)
 pkg_check_modules(SDL2_TTF REQUIRED SDL2_ttf)
+pkg_check_modules(SDL2_IMAGE REQUIRED SDL2_image)
 
 target_include_directories(Gates_of_Eras PRIVATE ${SDL2_INCLUDE_DIRS})
 target_include_directories(Gates_of_Eras PRIVATE ${SDL2_TTF_INCLUDE_DIRS})
+target_include_directories(Gates_of_Eras PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
 target_link_libraries(Gates_of_Eras PRIVATE ${SDL2_LIBRARIES})
 target_link_libraries(Gates_of_Eras PRIVATE ${SDL2_TTF_LIBRARIES})
+target_link_libraries(Gates_of_Eras PRIVATE ${SDL2_IMAGE_LIBRARIES})
 
 target_include_directories(Gates_of_Eras PRIVATE ${CMAKE_SOURCE_DIR}/src)

@@ -68,13 +68,13 @@ GameState Game::Initialize()
         return GameState::FAILURE;
     }
 
-    if(!(tilemap->loadTileset(renderer->getRenderer(), "assets/tileset.png", 32)))
+    if(!(tilemap->loadTileset(renderer->getRenderer(), "../assets/map/tileset.png", 32)))
     {
         SDL_Log("Failed to load tileset");
         return GameState::FAILURE;
     }
 
-    if(!(tilemap->loadMapFromFile("assets/map.txt")))
+    if(!(tilemap->loadMapFromFile("../assets/map/map.txt")))
     {
         SDL_Log("Failed to load map from file");
         return GameState::FAILURE;

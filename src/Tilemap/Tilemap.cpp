@@ -123,7 +123,7 @@ void Tilemap::render(SDL_Renderer* renderer, int windowWidth, int windowHeight)
         {
             int tileId = mapData[y][x];
             
-            if (tileId == 0) continue;
+            if (tileId == -1) continue;
             
             SDL_Rect srcRect = 
             {
